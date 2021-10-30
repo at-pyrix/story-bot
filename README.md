@@ -14,7 +14,6 @@ This is a story bot, that will scrape stories from r/stories subreddit and conve
 
 ## How to add your own music
 
-- Add the Music you want in the `Music` Folder in `story-bot`
-- Name the Happy songs `Happy-Music-4, Happy-Music-5...` and so on.
-- Name the Sad songs `Sad-Music-4...` and so on.
-- Make sure to add them in the songs_list array in `Podcast Generator.py`
+- Add the Music you want in the `Music`(CREATE) Folder in `story-bot`
+- Add the Sad Songs in `Sad-Music`(CREATE) and the other ones in `Happy-Music`(CREATE).
+- Only `.wav` files will work however.
