@@ -21,7 +21,7 @@ def animate(message):
         sleep(0.06)
 
 
-Thread(target=animate, args="Scraping Reddit Data")
+Thread(target=animate, args=("Scraping Reddit Data",)).start()
 
 reddit = praw.Reddit(client_id='client_id_here',
                      client_secret='client_secret_here', user_agent='app_name_here')
