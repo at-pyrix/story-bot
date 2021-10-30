@@ -17,3 +17,6 @@ This is a story bot, that will scrape stories from r/stories subreddit and conve
 - Add the Music you want in the `Music`(CREATE) Folder in `story-bot`
 - Add the Sad Songs in `Sad-Music`(CREATE) and the other ones in `Happy-Music`(CREATE).
 - Only `.wav` files will work however.
+
+#### For any Queries, Contact Me On:
+  [Discord](__yasho__)
