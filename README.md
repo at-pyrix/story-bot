@@ -19,4 +19,4 @@ This is a story bot, that will scrape stories from r/stories subreddit and conve
 - Only `.wav` files will work however.
 
 #### For any Queries, Contact Me On:
-  [Discord](__yasho__)
+  Discord: __yasho__#4476
