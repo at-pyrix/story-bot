@@ -23,8 +23,8 @@ def animate(message):
 
 Thread(target=animate, args="Scraping Reddit Data")
 
-reddit = praw.Reddit(client_id='iJZHDJ6AqTcLbhlNl32emA',
-                     client_secret='kvfoVBF6dG3UIrJrOcmLKYR7DHigyA', user_agent='story-bot')
+reddit = praw.Reddit(client_id='client_id_here',
+                     client_secret='client_secret_here', user_agent='app_name_here')
 
 scraped_data = {
     "title": [],
@@ -50,11 +50,3 @@ done = True
 
 
 os.system('pause')
-
-
-# story_of_the_day = {"title": [], "story": []}
-
-# story_of_the_day['title'].append(random.choice(scraped_data['title']))
-# story_of_the_day['story'].append(random.choice(scraped_data["body"]))
-
-# print(story_of_the_day)
