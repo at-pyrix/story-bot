@@ -1,3 +1,4 @@
-praw
-profanityfilter
-pydub
+praw==7.4.0
+profanityfilter==2.0.6
+pydub==0.25.1
+pyttsx3==2.90
