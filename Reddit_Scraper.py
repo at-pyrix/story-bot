@@ -19,7 +19,7 @@ def animate(message):
             break
         if done:
             print(
-                f'\r\u001B[32m\r✔️  Podcast Successfully Generated \u001B[33m{str (round(time() - start, 2))}s \u001B[0m \r')
+                f'\r\u001B[32m\r✔️  Reddit Scraping Completed \u001B[33m{str (round(time() - start, 2))}s \u001B[0m \r')
             break
         stdout.write('\r' + '\u001B[36m' + c)
         stdout.flush()
@@ -29,8 +29,9 @@ def animate(message):
 Thread(target=animate, args=("Scraping Reddit Data",)).start()
 
 try:
-    reddit = praw.Reddit(client_id='client_id',
-                         client_secret='client_secret', user_agent='user_agent')
+    # Fill in your credentials here
+    reddit = praw.Reddit(client_id='myClient-Id',
+                         client_secret='myClient-Secret', user_agent='myUser-Agent')
 
     scraped_data = {
         "title": [],
