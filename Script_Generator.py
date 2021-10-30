@@ -5,12 +5,16 @@ from profanityfilter import ProfanityFilter
 
 pf = ProfanityFilter()
 
-with open('Stories\\Stories.json','r') as file:
-    data = json.load(file)
-    file.close()
-    title = data['title']
-    body = data['body']
-    author = data['author']
+try:
+    with open('Stories\\Stories.json','r') as file:
+        data = json.load(file)
+        file.close()
+        title = data['title']
+        body = data['body']
+        author = data['author']
+except Exception:
+    print("\u001B[33m"+"Run Reddit_Scraper.py First"+"\u001B[0m")
+    exit()
 
 def nameFilter(author):
     author = list(author)
@@ -63,10 +67,26 @@ Author_Story = f"{title_final}. \n{body_final}"
 
 Host_Ending = f"That was a great story {author_name}, and with that, we've reached the end of the story, skeletor will be back with a new story next wednesday, Don't forget to come back on Storifaaeed Wednesday"
 
+# I tried my best to include *sad words here*
+words = ['sad', 'depressed', 'threatened', 'scared', 'frightened', 'gun', 'die', 'cried', 'cry', 'dead',
+         'worst', 'scary', 'scariest', 'ill', 'miserable', 'heartbreaking', 'breakup', 'broken', 'kill', 'suicide']
+
+for i in words:
+    if i in body_final or i in title_final:
+        Host_Line_1 = f"Hello Ladies and Gentlemen, Welcome to Storifaaeed Wednesday. Today here we have {author_final} with us"
+        Host_Ending = f"That was a really emotional story {author_name}, and with that, we've reached the end of the story, we will be back with a new story next wednesday, Thank you for listening"
+        STORY = "SAD"
+    else:
+        STORY = "HAPPY"
+
 content = f"{Host_Line_1}\n\n{Author_Line_1}\n\n{Host_Line_2}\n\n\n\n{Author_Story}\n\n\n\n\n\n{Host_Ending}".encode('utf-8')
 
-os.mkdir('Scripts')
-os.chdir('Scripts')
+try:
+    os.mkdir('Scripts')
+except FileExistsError:
+    pass
+finally:
+    os.chdir('Scripts')
 
 with open('Host_Line_1.txt','wb') as file:
     file.write((Host_Line_1).encode('utf-8'))
@@ -92,19 +112,10 @@ with open('Script.txt','wb') as file:
     file.write(content)
     file.close()
 
-# I tried my best to include *sad words here*
-words = ['sad','depressed','threatened','scared','frightened','gun','die','cried','cry','dead','worst','scary','scariest','ill','miserable','heartbreaking','breakup','broken','kill','suicide']
-
-for i in words:
-    if i in body_final or i in title_final:
-        STORY = "SAD"
-    else:
-        STORY = "HAPPY"
-
 with open('theme.txt','w') as file:
     file.write(STORY)
     file.close()
     
 print("\u001B[32m"+"Script Successfully Generated"+"\u001B[0m")
-
+os.system('pause')
 

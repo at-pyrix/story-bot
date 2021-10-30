@@ -1,8 +1,34 @@
-import os
-import pyttsx3
-import shutil
 import random
+import shutil
+import pyttsx3
+import os
+from threading import Thread
+from itertools import cycle
+from time import time, sleep
+from sys import stdout
 from pydub import AudioSegment
+
+done = False
+error = False
+
+start = time()
+
+def animate(message):
+    for c in cycle([f'⡿ {message}', f'⣟ {message}', f'⣯ {message}', f'⣷ {message}', f'⣾ {message}', f'⣽ {message}', f'⣻ {message}', f'⢿ {message}']):
+        if error:
+            print(f'\r\u001B[31m'+"An error Occurred"+"\u001B[0m")
+            break
+        if done:
+            print(f'\r\u001B[32m\r✔️  Podcast Successfully Generated \u001B[33m{str (round(time() - start, 2))}s \u001B[0m \r')
+            break
+
+        stdout.write('\r' + '\u001B[36m' + c)
+        stdout.flush()
+        sleep(0.06)
+
+
+Thread(target=animate, args=('Generating Podcast...',)).start()
+
 
 engine = pyttsx3.init("sapi5")
 engine.setProperty('rate', 185)
@@ -26,7 +52,12 @@ def tts(audio, fileName, voice_id=0):
     engine.runAndWait()
 
 
-os.chdir('Scripts')
+try:
+    os.chdir('Scripts')
+except Exception:
+    error = True
+    print("\r\u001B[33m"+"Run Script_Generator.py First"+"\u001B[0m")
+    exit()
 scripts = ["Host_Line_1", "Author_Line_1",
            "Host_Line_2", "Author_Story", "Host_Ending"]
 
@@ -59,24 +90,19 @@ combined = sound1 + sound2 + sound3 + sound4 + sound5
 os.chdir(default)
 file_handle = combined.export("Podcast.wav", format="wav")
 sound = AudioSegment.from_file('Podcast.wav')
-
 songs_list = []
 
 if STORY == "HAPPY":
-    songs_list = ['Music\\Happy-Music-1.wav', 'Music\\Happy-Music-2.wav',
-                  'Music\\Happy-Music-3.wav']
+    songs_list = os.listdir('Music\\Happy-Music')
+    os.chdir('Music\\Happy-Music')
 else:
-    songs_list = ["Music\\Happy1.wav",
-                  "Music\\Happy2.wav", "Music\\Happy3.wav"]
+    songs_list = os.listdir('Music\\Sad-Music')
+    os.chdir('Music\\Sad-Music')
 
 
 bgm = random.choice(songs_list)
-
-print(f"Background Music: {bgm}")
-
-bgm = AudioSegment.from_wav(bgm)
-
-lower = bgm - 22
+bgm_segment = AudioSegment.from_wav(bgm)
+lower = bgm_segment - 22
 
 overlay = sound.overlay(lower, position=0)
 
@@ -85,4 +111,7 @@ file_handle = overlay.export("Podcast.wav", format="wav")
 
 shutil.rmtree('Cache')
 
-print("\u001B[32m"+"Podcast Generated Successfully"+'\u001B[0m')
+
+done = True
+
+print("\u001B[0m\nBackground Music: \u001B[33m"+bgm+"\u001b[0m")

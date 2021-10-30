@@ -13,18 +13,17 @@ start = time()
 def animate(message):
     for c in cycle([f'⡿ {message}', f'⣟ {message}', f'⣯ {message}', f'⣷ {message}', f'⣾ {message}', f'⣽ {message}', f'⣻ {message}', f'⢿ {message}']):
         if done:
-            print(
-                f'\u001B[32m\r✔️  Task Completed Successfully in \u001B[33m{str (round(time() - start, 2))}s \u001B[0m ')
+            print(f'\u001B[32m\r✔️  Task Completed Successfully in \u001B[33m{str (round(time() - start, 2))}s \u001B[0m \n')
             break
         stdout.write('\r' + '\u001B[36m' + c)
         stdout.flush()
         sleep(0.06)
 
 
-Thread(target=animate, args="Scraping Reddit Data")
+Thread(target=animate, args=("Scraping Reddit Data",)).start()
 
-reddit = praw.Reddit(client_id='client_id_here',
-                     client_secret='client_secret_here', user_agent='app_name_here')
+reddit = praw.Reddit(client_id='client_id',
+                     client_secret='client_secret', user_agent='user_agent')
 
 scraped_data = {
     "title": [],
@@ -40,13 +39,16 @@ for post in hot_posts:
 
 json_data = json.dumps(scraped_data, indent=4)
 
-os.mkdir('Stories')
-os.chdir('Stories')
+try:
+    os.mkdir('Stories')
+except FileExistsError: pass
+finally:
+    os.chdir('Stories')
 
 with open("Stories.json", "w") as file:
     file.write(json_data)
 
 done = True
 
-
+os.system('@echo off')
 os.system('pause')
