@@ -18,5 +18,3 @@ This is a story bot, that will scrape stories from r/stories subreddit and conve
 - Add the Sad Songs in `Sad-Music` and the other ones in `Happy-Music`.
 - Only `.wav` files will work however.
 ---
-#### For any Queries, Contact Me On:
-  Discord: __yasho__#4476
