@@ -18,3 +18,6 @@ This is a story bot, that will scrape stories from r/stories subreddit and conve
 - Add the Sad Songs in `Sad-Music` and the other ones in `Happy-Music`.
 - Only `.wav` files will work however.
 ---
+
+Read my blog: https://notyasho.netlify.app/blogs
+[Contact](https://notyasho.netlify.app/contact)
